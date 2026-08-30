@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import apiClient from '../api/client';
+import { getBoardsApi, createBoardApi, deleteBoardApi } from '../api/boards';
 
 export function useBoards() {
   const [boards, setBoards] = useState([]);
@@ -10,7 +10,7 @@ export function useBoards() {
     setLoading(true);
     setError(null);
     try {
-      const response = await apiClient.get('/boards');
+      const response = await getBoardsApi();
       setBoards(response.data.data);
     } catch (err) {
       setError(err.message || 'Failed to load boards.');
@@ -24,13 +24,13 @@ export function useBoards() {
   }, [fetchBoards]);
 
   const createBoard = async (title) => {
-    const response = await apiClient.post('/boards', { title });
+    const response = await createBoardApi({ title });
     setBoards((prev) => [response.data.data, ...prev]);
     return response.data.data;
   };
 
   const deleteBoard = async (id) => {
-    await apiClient.delete(`/boards/${id}`);
+    await deleteBoardApi(id);
     setBoards((prev) => prev.filter((b) => b._id !== id));
   };
 

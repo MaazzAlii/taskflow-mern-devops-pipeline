@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import apiClient from '../api/client';
+import { getMeApi, loginApi, registerApi, logoutApi } from '../api/auth';
 
 const AuthContext = createContext(null);
 
@@ -8,11 +8,10 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Restore user session on app load
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await apiClient.get('/auth/me');
+        const response = await getMeApi();
         setUser(response.data.user);
       } catch (err) {
         setUser(null);
@@ -26,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     setError(null);
     try {
-      const response = await apiClient.post('/auth/login', { email, password });
+      const response = await loginApi({ email, password });
       setUser(response.data.user);
       return response.data.user;
     } catch (err) {
@@ -38,7 +37,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (name, email, password) => {
     setError(null);
     try {
-      const response = await apiClient.post('/auth/register', { name, email, password });
+      const response = await registerApi({ name, email, password });
       setUser(response.data.user);
       return response.data.user;
     } catch (err) {
@@ -50,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     setError(null);
     try {
-      await apiClient.post('/auth/logout');
+      await logoutApi();
     } catch (err) {
       console.error('Logout error:', err);
     } finally {

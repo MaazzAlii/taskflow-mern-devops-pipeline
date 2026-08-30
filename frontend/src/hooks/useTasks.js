@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import apiClient from '../api/client';
+import { getBoardByIdApi } from '../api/boards';
+import { getTasksForBoardApi, createTaskApi, updateTaskApi, deleteTaskApi } from '../api/tasks';
 
 export function useTasks(boardId) {
   const [board, setBoard] = useState(null);
@@ -13,8 +14,8 @@ export function useTasks(boardId) {
     setError(null);
     try {
       const [boardRes, tasksRes] = await Promise.all([
-        apiClient.get(`/boards/${boardId}`),
-        apiClient.get(`/boards/${boardId}/tasks`),
+        getBoardByIdApi(boardId),
+        getTasksForBoardApi(boardId),
       ]);
       setBoard(boardRes.data.data);
       setTasks(tasksRes.data.data);
@@ -30,19 +31,19 @@ export function useTasks(boardId) {
   }, [fetchBoardAndTasks]);
 
   const createTask = async (taskData) => {
-    const response = await apiClient.post(`/boards/${boardId}/tasks`, taskData);
+    const response = await createTaskApi(boardId, taskData);
     setTasks((prev) => [response.data.data, ...prev]);
     return response.data.data;
   };
 
   const updateTask = async (taskId, updates) => {
-    const response = await apiClient.patch(`/tasks/${taskId}`, updates);
+    const response = await updateTaskApi(taskId, updates);
     setTasks((prev) => prev.map((t) => (t._id === taskId ? response.data.data : t)));
     return response.data.data;
   };
 
   const deleteTask = async (taskId) => {
-    await apiClient.delete(`/tasks/${taskId}`);
+    await deleteTaskApi(taskId);
     setTasks((prev) => prev.filter((t) => t._id !== taskId));
   };
 

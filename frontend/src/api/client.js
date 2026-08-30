@@ -13,11 +13,18 @@ const apiClient = axios.create({
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    const customError = {
-      message: error.response?.data?.error || error.message || 'An unexpected error occurred',
-      status: error.response?.status || 500,
-    };
-    return Promise.reject(customError);
+    const status = error.response?.status;
+    const message = error.response?.data?.error || error.message || 'An unexpected error occurred';
+
+    // Auto-redirect to login on 401 (excluding /auth/me or /auth/login endpoints)
+    if (status === 401 && !window.location.pathname.startsWith('/login') && !error.config.url.includes('/auth/me')) {
+      window.location.href = '/login';
+    }
+
+    return Promise.reject({
+      message,
+      status: status || 500,
+    });
   }
 );
 
