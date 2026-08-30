@@ -1,8 +1,8 @@
 # ==============================================================================
-# TaskFlow Production Multi-Container Orchestration (AWS EC2)
+# TaskFlow Production Multi-Container Orchestration (GCP Compute Engine / AWS EC2)
 # ==============================================================================
 # Uses pre-built images from GitHub Container Registry (GHCR) and connects to
-# external MongoDB Atlas via environment variables in /home/ubuntu/taskflow/.env
+# external MongoDB Atlas via environment variables in ~/taskflow/.env
 
 version: '3.8'
 
@@ -10,7 +10,7 @@ services:
   backend:
     image: ghcr.io/maazzalii/taskflow-backend:latest
     container_name: taskflow-backend-prod
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env
     networks:
@@ -25,7 +25,7 @@ services:
   frontend:
     image: ghcr.io/maazzalii/taskflow-frontend:latest
     container_name: taskflow-frontend-prod
-    restart: always
+    restart: unless-stopped
     ports:
       - "80:80"
     depends_on:

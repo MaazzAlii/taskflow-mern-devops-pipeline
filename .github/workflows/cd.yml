@@ -1,4 +1,4 @@
-name: CD Pipeline (Deploy to AWS EC2)
+name: CD Pipeline (Deploy to GCP / AWS Cloud VM)
 
 on:
   push:
@@ -47,7 +47,7 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/taskflow-frontend:${{ github.sha }}
 
   deploy:
-    name: Deploy to AWS EC2 Host
+    name: Deploy to Cloud VM (GCP / AWS)
     needs: [build-and-push]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -55,21 +55,21 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Copy Production Compose File to EC2
+      - name: Copy Production Compose File to Cloud VM
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          host: ${{ secrets.GCP_HOST || secrets.EC2_HOST }}
+          username: ${{ secrets.GCP_USER || secrets.EC2_USER || 'ubuntu' }}
+          key: ${{ secrets.GCP_SSH_KEY || secrets.EC2_SSH_KEY }}
           source: "docker-compose.prod.yml"
           target: "~/taskflow/"
 
-      - name: Execute Remote Redeploy on EC2
+      - name: Execute Remote Redeploy on Cloud VM
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          host: ${{ secrets.GCP_HOST || secrets.EC2_HOST }}
+          username: ${{ secrets.GCP_USER || secrets.EC2_USER || 'ubuntu' }}
+          key: ${{ secrets.GCP_SSH_KEY || secrets.EC2_SSH_KEY }}
           script: |
             cd ~/taskflow
             docker compose -f docker-compose.prod.yml pull

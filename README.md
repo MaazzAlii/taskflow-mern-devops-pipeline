@@ -5,7 +5,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-v20.x-green.svg)](https://nodejs.org)
 [![Docker](https://img.shields.io/badge/Docker-Multi--Stage-blue.svg)](https://www.docker.com/)
 
-> **TaskFlow** is an enterprise-ready full-stack MERN (MongoDB, Express, React, Node.js) board and task management application backed by a complete production DevOps pipeline including multi-stage Dockerization, GitHub Actions CI/CD, GHCR container registry publishing, host security hardening, and AWS EC2 deployment.
+> **TaskFlow** is an enterprise-ready full-stack MERN (MongoDB, Express, React, Node.js) board and task management application backed by a complete production DevOps pipeline including multi-stage Dockerization, GitHub Actions CI/CD, GHCR container registry publishing, host security hardening, and Cloud VM deployment (GCP Compute Engine Always Free / AWS EC2).
 
 ---
 
@@ -30,7 +30,7 @@
 
 - **Frontend:** React 18, Vite, React Router v6, Axios, Vanilla CSS Glassmorphism
 - **Backend:** Node.js v20, Express.js, Mongoose, JWT, bcryptjs, Helmet, Cors, Zod, Rate-Limit
-- **DevOps & Infrastructure:** Docker (Multi-stage), Docker Compose, Nginx, GitHub Actions (CI/CD), GHCR, AWS EC2, UFW Firewall
+- **DevOps & Infrastructure:** Docker (Multi-stage), Docker Compose, Nginx, GitHub Actions (CI/CD), GHCR, GCP Compute Engine (`e2-micro` Always Free) / AWS EC2, UFW Firewall
 
 ---
 
@@ -88,8 +88,8 @@ npm test
                                                                             |
                                                                             v
  +---------------------+         +---------------------+         +---------------------+
- | AWS EC2 Production  | <------ | Docker Compose Pull | <------ | SSH Deploy Trigger  |
- |  Live Application   |         | & Container Restart |         |   (appleboy/ssh)    |
+ | Cloud Production VM | <------ | Docker Compose Pull | <------ | SSH Deploy Trigger  |
+ |  (GCP / AWS Host)   |         | & Container Restart |         |   (appleboy/ssh)    |
  +---------------------+         +---------------------+         +---------------------+
 ```
 
@@ -100,8 +100,10 @@ npm test
 - [`docs/architecture.md`](file:///docs/architecture.md) — System request flow & container orchestration diagram
 - [`docs/environment-variables.md`](file:///docs/environment-variables.md) — Environment variable reference matrix
 - [`docs/local-docker-verification.md`](file:///docs/local-docker-verification.md) — Local multi-container verification report
+- [`docs/gcp-provisioning-guide.md`](file:///docs/gcp-provisioning-guide.md) — GCP Compute Engine `e2-micro` launch & firewall guide
+- [`docs/gcp-vm-hardening-guide.md`](file:///docs/gcp-vm-hardening-guide.md) — GCP VM hardening & swap optimization script
 - [`docs/ec2-provisioning-guide.md`](file:///docs/ec2-provisioning-guide.md) — AWS EC2 launch & security group specs
-- [`docs/ec2-hardening-guide.md`](file:///docs/ec2-hardening-guide.md) — Server hardening & UFW firewall setup script
+- [`docs/ec2-hardening-guide.md`](file:///docs/ec2-hardening-guide.md) — AWS EC2 server hardening & UFW setup script
 - [`docs/deployment.md`](file:///docs/deployment.md) — GHCR container registry & CD deployment guide
 - [`docs/security-checklist.md`](file:///docs/security-checklist.md) — Production security audit checklist
 - [`docs/ssl-domain-guide.md`](file:///docs/ssl-domain-guide.md) — Custom domain & Let's Encrypt SSL guide

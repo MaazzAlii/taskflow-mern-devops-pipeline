@@ -1,20 +1,24 @@
 # Deployment & Recovery Guide — TaskFlow
 
-> **Handoff Reference:** Detailed, reproducible instructions for deploying, updating, and disaster-recovering the TaskFlow production infrastructure on AWS EC2.
+> **Handoff Reference:** Detailed, reproducible instructions for deploying, updating, and disaster-recovering the TaskFlow production infrastructure on Google Cloud Platform (GCP) or AWS EC2.
 
 ---
 
-## 1. Initial Infrastructure Setup
+## 1. Cloud Host Setup (GCP Compute Engine / AWS EC2)
 
-1. **Provision EC2 Host:** Launch an Ubuntu 22.04 LTS instance with 20GB GP3 storage and allocate an Elastic IP per [`docs/ec2-provisioning-guide.md`](file:///docs/ec2-provisioning-guide.md).
-2. **Execute Host Hardening:** SSH into instance and run the setup script:
+### Option A: GCP Compute Engine (Always Free Tier — Recommended)
+1. **Provision `e2-micro` Instance:** Create an `e2-micro` VM in `us-central1-a` with 30GB `pd-standard` disk and static IP per [`docs/gcp-provisioning-guide.md`](file:///docs/gcp-provisioning-guide.md).
+2. **Execute Host Hardening & Swap Setup:**
+   ```bash
+   chmod +x scripts/setup-gcp-vm.sh && ./scripts/setup-gcp-vm.sh
+   ```
+3. **Configure Environment Secrets:** Create `~/taskflow/.env` with production credentials per [`docs/environment-variables.md`](file:///docs/environment-variables.md).
+
+### Option B: AWS EC2 Instance
+1. **Provision EC2 Instance:** Launch an Ubuntu 22.04 LTS instance with 20GB GP3 storage and Elastic IP per [`docs/ec2-provisioning-guide.md`](file:///docs/ec2-provisioning-guide.md).
+2. **Execute Host Hardening:**
    ```bash
    chmod +x scripts/setup-ec2.sh && ./scripts/setup-ec2.sh
-   ```
-3. **Configure Environment Secrets:** Create `/home/ubuntu/taskflow/.env` with production credentials per [`docs/environment-variables.md`](file:///docs/environment-variables.md).
-4. **GHCR Authentication:** Log host Docker into GHCR using a fine-scoped PAT (`read:packages`):
-   ```bash
-   echo "<PAT_TOKEN>" | docker login ghcr.io -u MaazzAlii --password-stdin
    ```
 
 ---
@@ -36,9 +40,9 @@ Every commit pushed to the `main` branch triggers:
 
 ## 3. Manual Handoff & Disaster Recovery
 
-If the EC2 host needs to be completely rebuilt:
-1. Re-run `scripts/setup-ec2.sh` on a fresh EC2 instance.
-2. Restore `/home/ubuntu/taskflow/.env` secrets from GitHub Actions Secrets.
+If the VM host needs to be completely rebuilt:
+1. Re-run `scripts/setup-gcp-vm.sh` (or `setup-ec2.sh`) on a fresh cloud instance.
+2. Restore `~/taskflow/.env` secrets.
 3. Pull production compose file and launch containers:
    ```bash
    cd ~/taskflow

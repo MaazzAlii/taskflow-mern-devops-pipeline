@@ -10,7 +10,7 @@
 |-------------------------|---------------------|-----------------------------------|
 | **1. Dockerized MERN Application Repo** | Verified | GitHub Public Repository: [https://github.com/MaazzAlii/taskflow-mern-devops-pipeline](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline) |
 | **2. Automated CI/CD Pipeline** | Verified | GitHub Actions Workflow: [https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions) |
-| **3. Deployed Cloud Container URL** | Verified | Production Host URL: `http://<AWS_EC2_ELASTIC_IP>/` |
+| **3. Deployed Cloud Container URL** | Verified | Production Host URL: `http://<GCP_STATIC_IP>/` (or `http://<AWS_EC2_ELASTIC_IP>/`) |
 
 ---
 
@@ -21,9 +21,9 @@
 > Successfully built, containerized, and deployed **TaskFlow** — a full-stack MERN board and task management platform backed by an end-to-end automated DevOps pipeline.
 > 
 > - **Public Repository:** https://github.com/MaazzAlii/taskflow-mern-devops-pipeline
-> - **CI/CD Pipeline Workflows:** Linting, testing (Jest & Vitest), Docker multi-stage builds, GHCR container publishing, and automated SSH deployment to AWS EC2.
+> - **CI/CD Pipeline Workflows:** Linting, testing (Jest & Vitest), Docker multi-stage builds, GHCR container publishing, and automated SSH deployment.
 > - **Docker Orchestration:** Production multi-stage Dockerfiles (`backend/Dockerfile`, `frontend/Dockerfile`) and multi-container Compose orchestration (`docker-compose.yml` for local dev, `docker-compose.prod.yml` for cloud prod).
-> - **Cloud Infrastructure:** AWS EC2 Ubuntu 22.04 LTS instance with Elastic IP, hardened UFW firewall rules, and MongoDB Atlas database.
+> - **Cloud Infrastructure:** GCP Compute Engine `e2-micro` Always Free VM (or AWS EC2), hardened UFW firewall rules, and MongoDB Atlas database.
 
 ---
 
