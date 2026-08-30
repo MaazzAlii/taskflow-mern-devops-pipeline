@@ -1,6 +1,5 @@
 const request = require('supertest');
 const app = require('../src/app');
-const Board = require('../src/models/Board');
 
 describe('Board API Integration Tests (InMemory DB)', () => {
   let cookieUserA;

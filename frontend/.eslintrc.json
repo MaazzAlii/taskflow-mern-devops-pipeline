@@ -1,8 +1,10 @@
 {
   "env": {
     "browser": true,
-    "es2020": true
+    "es2020": true,
+    "node": true
   },
+  "ignorePatterns": ["dist", "src/tests"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",

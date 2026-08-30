@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "lint": "eslint . --allow-empty-input",
+    "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest --runInBand"
   },
