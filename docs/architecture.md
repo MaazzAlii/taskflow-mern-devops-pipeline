@@ -4,7 +4,7 @@
 
 ---
 
-## 🏗️ System Architecture & Request Lifecycle
+## System Architecture & Request Lifecycle
 
 ```text
                                   +---------------------------------------+
@@ -44,7 +44,7 @@
 
 ---
 
-## 🔄 CI/CD Continuous Delivery Lifecycle Workflow
+## CI/CD Continuous Delivery Lifecycle Workflow
 
 ```text
  +---------------------+         +---------------------+         +---------------------+
@@ -61,7 +61,7 @@
 
 ---
 
-## ⚙️ Component Responsibilities
+## Component Responsibilities
 
 1. **Frontend Container (`taskflow-frontend`):** Serves built React SPA and handles client-side routing via Nginx fallback (`try_files $uri /index.html`).
 2. **Backend Container (`taskflow-backend`):** Express REST API executing under `USER node`, providing authentication (JWT in `httpOnly` cookie), input validation (Zod), and business logic.

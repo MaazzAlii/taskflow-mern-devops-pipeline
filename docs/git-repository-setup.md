@@ -1,19 +1,26 @@
-# Git & GitHub Repository Setup — TaskFlow
+# Git Repository Architecture & Branching Strategy — TaskFlow
 
-> **Repository Identity:**
-> - **Public Repository:** [https://github.com/MaazzAlii/taskflow-mern-devops-pipeline](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline)
-> - **Primary Branch:** `main`
+> **Repository Governance:** Standards for branch protection, commit conventions, and repository structure.
 
 ---
 
-## 🔒 Security Audit & Branch Protection
+## Commit Message Conventions
 
-1. **Ignored Meta Files:**
-   - `.env`, `.env.*` (Environment secrets)
-   - `node_modules/` (Dependencies)
-   - `dist/`, `build/`, `coverage/` (Generated build/test outputs)
-   - `00-START-HERE.md`, `DevOps_Playlist_Master_Notes.md`, `mern-devops-prompts-final/` (Prompt meta-files)
+All commits follow the Conventional Commits specification:
 
-2. **Commit Policy:**
-   - Every feature, bugfix, refactor, and documentation update is committed individually with clear, standardized messages (`feat:`, `chore:`, `test:`, `build:`, `docs:`, `style:`, `refactor:`).
-   - Direct push to remote `main` branch with CI status check enforcement.
+| Prefix | Purpose | Example |
+|--------|---------|---------|
+| `feat:` | New feature implementation | `feat: implement JWT-based authentication` |
+| `fix:` | Bug fix | `fix: resolve CORS credentials header misconfiguration` |
+| `docs:` | Documentation update | `docs: document environment variable matrix` |
+| `test:` | Adding or modifying tests | `test: complete backend test suite with in-memory MongoDB` |
+| `chore:` | Maintenance tasks | `chore: initialize project structure and planning docs` |
+| `build:` | Build system or container edits | `build: add production Dockerfile for backend service` |
+| `ci:` | CI/CD pipeline changes | `ci: add GitHub Actions workflow for lint, test, and build` |
+
+---
+
+## Branching & Protection Policy
+
+- **Main Branch (`main`):** Production-ready code only. All commits deployed via CD workflow.
+- **Pull Request Rules:** Requires CI checks to pass prior to merge.

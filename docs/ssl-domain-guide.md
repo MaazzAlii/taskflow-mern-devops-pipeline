@@ -4,7 +4,7 @@
 
 ---
 
-## 🌐 1. DNS A-Record Configuration
+## 1. DNS A-Record Configuration
 
 Point your custom domain's `A` record at the AWS EC2 Elastic IP address:
 
@@ -14,7 +14,7 @@ Point your custom domain's `A` record at the AWS EC2 Elastic IP address:
 
 ---
 
-## 🔐 2. Certbot SSL Certificate Provisioning
+## 2. Certbot SSL Certificate Provisioning
 
 Run Certbot on the EC2 host:
 
@@ -29,7 +29,7 @@ sudo certbot --nginx -d taskflow.yourdomain.com --non-interactive --agree-tos -m
 
 ---
 
-## 🔄 3. Nginx HTTPS & SSL Hardening Config (`/etc/nginx/sites-available/default`)
+## 3. Nginx HTTPS & SSL Hardening Config (`/etc/nginx/sites-available/default`)
 
 ```nginx
 server {
@@ -59,7 +59,7 @@ server {
 
 ---
 
-## ⏰ 4. Auto-Renewal Verification
+## 4. Auto-Renewal Verification
 
 Verify Let's Encrypt automatic certificate renewal:
 

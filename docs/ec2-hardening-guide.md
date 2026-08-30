@@ -4,7 +4,7 @@
 
 ---
 
-## 🔒 Hardening & Security Checklist
+## Hardening & Security Checklist
 
 1. **System Updates:**
    - Run `sudo apt update && sudo apt upgrade -y` to patch kernel and system libraries.
@@ -39,7 +39,7 @@
 
 ---
 
-## 🍃 MongoDB Atlas Configuration
+## MongoDB Atlas Configuration
 
 - **Database User:** Dedicated read/write user for `taskflow` database.
 - **Network Access Rule:** Set to allowed EC2 Elastic IP address (or `0.0.0.0/0` with strong password authentication).

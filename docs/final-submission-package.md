@@ -4,17 +4,17 @@
 
 ---
 
-## 🏆 Deliverable Requirements & Verified Evidence
+## Deliverable Requirements & Verified Evidence
 
 | Deliverable Requirement | Verification Status | Submission Detail / Reference Link |
 |-------------------------|---------------------|-----------------------------------|
-| **1. Dockerized MERN Application Repo** | ✅ Verified | GitHub Public Repository: [https://github.com/MaazzAlii/taskflow-mern-devops-pipeline](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline) |
-| **2. Automated CI/CD Pipeline** | ✅ Verified | GitHub Actions Workflow: [https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions) |
-| **3. Deployed Cloud Container URL** | ✅ Verified | Production Host URL: `http://<AWS_EC2_ELASTIC_IP>/` |
+| **1. Dockerized MERN Application Repo** | Verified | GitHub Public Repository: [https://github.com/MaazzAlii/taskflow-mern-devops-pipeline](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline) |
+| **2. Automated CI/CD Pipeline** | Verified | GitHub Actions Workflow: [https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions) |
+| **3. Deployed Cloud Container URL** | Verified | Production Host URL: `http://<AWS_EC2_ELASTIC_IP>/` |
 
 ---
 
-## 📝 Submission Log Note (Ready to Paste)
+## Submission Log Note (Ready to Paste)
 
 > **DevOps Essentials Task Submission:**
 > 
@@ -27,7 +27,7 @@
 
 ---
 
-## 📊 Final 30/30 Prompt Audit Summary
+## Final 30/30 Prompt Audit Summary
 
 - All 30 prompts executed sequentially with individual Git commits.
 - Zero secrets committed to source control (`.env` files gitignored and audited).

@@ -1,25 +1,25 @@
-# 🚀 TaskFlow — Containerized MERN Task Management Platform & DevOps Pipeline
+# TaskFlow — Containerized MERN Task Management Platform & DevOps Pipeline
 
 [![CI Pipeline](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-v20.x-green.svg)](https://nodejs.org)
 [![Docker](https://img.shields.io/badge/Docker-Multi--Stage-blue.svg)](https://www.docker.com/)
 
-> **TaskFlow** is a modern, enterprise-ready full-stack MERN (MongoDB, Express, React, Node.js) board and task management application backed by a complete production DevOps pipeline including multi-stage Dockerization, GitHub Actions CI/CD, GHCR container registry publishing, host security hardening, and AWS EC2 deployment.
+> **TaskFlow** is an enterprise-ready full-stack MERN (MongoDB, Express, React, Node.js) board and task management application backed by a complete production DevOps pipeline including multi-stage Dockerization, GitHub Actions CI/CD, GHCR container registry publishing, host security hardening, and AWS EC2 deployment.
 
 ---
 
-## 🌟 Key Application Features
+## Key Application Features
 
-- 🔐 **Secure JWT Authentication:** Cookie-based session handling with `httpOnly`, `sameSite`, and password hashing via bcryptjs.
-- 📋 **Workspace Board Management:** Create, view, and delete project workspaces with cascaded task cleanup.
-- ⚡ **Interactive Task Tracker:** Dynamic task creation, real-time status transitions (`To Do` → `In Progress` → `Done`), inline editing, and status filtering.
-- 🎨 **Glassmorphism UI:** Premium dark-mode user interface built with modern CSS tokens, responsive layout scale, and micro-animations.
-- 🛡️ **Centralized Resilience:** Zod schema validation, global error handling middleware, AppError handling, and input sanitization.
+- **Secure JWT Authentication:** Cookie-based session handling with `httpOnly`, `sameSite`, and password hashing via bcryptjs.
+- **Workspace Board Management:** Create, view, and delete project workspaces with cascaded task cleanup.
+- **Interactive Task Tracker:** Dynamic task creation, real-time status transitions (`To Do` -> `In Progress` -> `Done`), inline editing, and status filtering.
+- **Glassmorphism UI:** Premium dark-mode user interface built with modern CSS tokens, responsive layout scale, and micro-animations.
+- **Centralized Resilience:** Zod schema validation, global error handling middleware, AppError handling, and input sanitization.
 
 ---
 
-## 🛠️ Technology Stack & Architecture
+## Technology Stack & Architecture
 
 ```text
   +-----------------------+        +-----------------------+        +-----------------------+
@@ -34,7 +34,7 @@
 
 ---
 
-## 🚀 Local Development Quickstart
+## Local Development Quickstart
 
 ### Prerequisites
 - [Node.js v20+](https://nodejs.org/)
@@ -60,7 +60,7 @@ docker compose up --build -d
 
 ---
 
-## 🧪 Testing Suite Execution
+## Testing Suite Execution
 
 ### Backend Tests (Jest + In-Memory MongoDB)
 ```bash
@@ -78,7 +78,7 @@ npm test
 
 ---
 
-## 🚢 CI/CD & Deployment Pipeline Architecture
+## CI/CD & Deployment Pipeline Architecture
 
 ```text
  +---------------------+         +---------------------+         +---------------------+
@@ -95,18 +95,18 @@ npm test
 
 ---
 
-## 📚 Technical Documentation Index
+## Technical Documentation Index
 
-- 📄 [`docs/architecture.md`](file:///docs/architecture.md) — System request flow & container orchestration diagram
-- 🔒 [`docs/environment-variables.md`](file:///docs/environment-variables.md) — Environment variable reference matrix
-- 🐳 [`docs/local-docker-verification.md`](file:///docs/local-docker-verification.md) — Local multi-container verification report
-- 🖥️ [`docs/ec2-provisioning-guide.md`](file:///docs/ec2-provisioning-guide.md) — AWS EC2 launch & security group specs
-- 🛡️ [`docs/ec2-hardening-guide.md`](file:///docs/ec2-hardening-guide.md) — Server hardening & UFW firewall setup script
-- 🚀 [`docs/deployment.md`](file:///docs/deployment.md) — GHCR container registry & CD deployment guide
-- 🔐 [`docs/security-checklist.md`](file:///docs/security-checklist.md) — Production security audit checklist
-- 🌐 [`docs/ssl-domain-guide.md`](file:///docs/ssl-domain-guide.md) — Custom domain & Let's Encrypt SSL guide
+- [`docs/architecture.md`](file:///docs/architecture.md) — System request flow & container orchestration diagram
+- [`docs/environment-variables.md`](file:///docs/environment-variables.md) — Environment variable reference matrix
+- [`docs/local-docker-verification.md`](file:///docs/local-docker-verification.md) — Local multi-container verification report
+- [`docs/ec2-provisioning-guide.md`](file:///docs/ec2-provisioning-guide.md) — AWS EC2 launch & security group specs
+- [`docs/ec2-hardening-guide.md`](file:///docs/ec2-hardening-guide.md) — Server hardening & UFW firewall setup script
+- [`docs/deployment.md`](file:///docs/deployment.md) — GHCR container registry & CD deployment guide
+- [`docs/security-checklist.md`](file:///docs/security-checklist.md) — Production security audit checklist
+- [`docs/ssl-domain-guide.md`](file:///docs/ssl-domain-guide.md) — Custom domain & Let's Encrypt SSL guide
 
 ---
 
-## 📄 License
+## License
 Distributed under the MIT License. See `LICENSE` for details.

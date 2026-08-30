@@ -4,7 +4,7 @@
 
 ---
 
-## 🖥️ EC2 Instance Specifications
+## EC2 Instance Specifications
 
 | Setting | Production Value | Description |
 |---------|------------------|-------------|
@@ -17,7 +17,7 @@
 
 ---
 
-## 🛡️ Security Group Rules (`taskflow-sg`)
+## Security Group Rules (`taskflow-sg`)
 
 | Type | Protocol | Port Range | Source / Destination | Purpose |
 |------|----------|------------|----------------------|---------|
@@ -27,7 +27,7 @@
 
 ---
 
-## ⚡ AWS CLI Provisioning Script Template
+## AWS CLI Provisioning Script Template
 
 ```bash
 # 1. Create Security Group

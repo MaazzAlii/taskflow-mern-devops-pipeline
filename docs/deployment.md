@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 1. Initial Infrastructure Setup
+## 1. Initial Infrastructure Setup
 
 1. **Provision EC2 Host:** Launch an Ubuntu 22.04 LTS instance with 20GB GP3 storage and allocate an Elastic IP per [`docs/ec2-provisioning-guide.md`](file:///docs/ec2-provisioning-guide.md).
 2. **Execute Host Hardening:** SSH into instance and run the setup script:
@@ -19,7 +19,7 @@
 
 ---
 
-## 🔄 2. Automated CD Pipeline Deployment
+## 2. Automated CD Pipeline Deployment
 
 Every commit pushed to the `main` branch triggers:
 1. GitHub Actions CI validation (Lint, Test, Build).
@@ -34,7 +34,7 @@ Every commit pushed to the `main` branch triggers:
 
 ---
 
-## 🆘 3. Manual Handoff & Disaster Recovery
+## 3. Manual Handoff & Disaster Recovery
 
 If the EC2 host needs to be completely rebuilt:
 1. Re-run `scripts/setup-ec2.sh` on a fresh EC2 instance.
