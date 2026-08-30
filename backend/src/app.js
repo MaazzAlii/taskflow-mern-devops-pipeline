@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const healthRoutes = require('./routes/health');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 
 // Route mounts
 app.use('/api/health', healthRoutes);
+app.use('/api/auth', authRoutes);
 
 // 404 Handler
 app.use((req, res) => {
