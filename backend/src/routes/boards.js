@@ -1,5 +1,7 @@
 const express = require('express');
 const requireAuth = require('../middleware/requireAuth');
+const validate = require('../middleware/validate');
+const { createBoardSchema, updateBoardSchema, createTaskSchema } = require('../validators/schemas');
 const {
   getBoards,
   createBoard,
@@ -14,21 +16,19 @@ const {
 
 const router = express.Router();
 
-// Apply requireAuth to all board endpoints
 router.use(requireAuth);
 
 router.route('/')
   .get(getBoards)
-  .post(createBoard);
+  .post(validate(createBoardSchema), createBoard);
 
 router.route('/:id')
   .get(getBoardById)
-  .patch(updateBoard)
+  .patch(validate(updateBoardSchema), updateBoard)
   .delete(deleteBoard);
 
-// Nested routes for tasks under a board
 router.route('/:boardId/tasks')
   .get(getTasksForBoard)
-  .post(createTask);
+  .post(validate(createTaskSchema), createTask);
 
 module.exports = router;

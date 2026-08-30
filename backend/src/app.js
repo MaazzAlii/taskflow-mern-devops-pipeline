@@ -6,6 +6,7 @@ const healthRoutes = require('./routes/health');
 const authRoutes = require('./routes/auth');
 const boardRoutes = require('./routes/boards');
 const taskRoutes = require('./routes/tasks');
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -46,11 +47,6 @@ app.use((req, res) => {
 });
 
 // Centralized error handler
-app.use((err, req, res, _next) => {
-  console.error(err.stack);
-  res.status(err.status || 500).json({
-    error: err.message || 'Internal Server Error',
-  });
-});
+app.use(errorHandler);
 
 module.exports = app;
