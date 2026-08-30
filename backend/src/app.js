@@ -4,6 +4,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const healthRoutes = require('./routes/health');
 const authRoutes = require('./routes/auth');
+const boardRoutes = require('./routes/boards');
+const taskRoutes = require('./routes/tasks');
 
 const app = express();
 
@@ -35,6 +37,8 @@ app.use((req, res, next) => {
 // Route mounts
 app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/boards', boardRoutes);
+app.use('/api/tasks', taskRoutes);
 
 // 404 Handler
 app.use((req, res) => {
