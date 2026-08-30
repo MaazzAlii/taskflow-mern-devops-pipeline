@@ -5,6 +5,8 @@ import Navbar from './components/layout/Navbar';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import BoardsList from './pages/BoardsList';
+import BoardDetail from './pages/BoardDetail';
 import NotFound from './pages/NotFound';
 
 function AppRoutes() {
@@ -21,8 +23,8 @@ function AppRoutes() {
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} isLoading={loading} />}>
-            <Route path="/" element={<div className="page-card">Boards List Placeholder</div>} />
-            <Route path="/boards/:id" element={<div className="page-card">Board Detail Placeholder</div>} />
+            <Route path="/" element={<BoardsList />} />
+            <Route path="/boards/:id" element={<BoardDetail />} />
           </Route>
 
           {/* 404 Route */}
