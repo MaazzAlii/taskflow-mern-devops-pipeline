@@ -9,13 +9,15 @@ jest.mock('../../models/Board');
 jest.mock('../../models/Task');
 jest.mock('../../models/User');
 
-describe('Boards & Tasks Core API', () => {
+describe('Boards & Tasks Core API Unit Tests', () => {
   const userId = '507f1f77bcf86cd799439011';
-  const token = generateToken(userId);
-  const authCookie = `token=${token}`;
+  let authCookie;
 
   beforeEach(() => {
     jest.clearAllMocks();
+    const token = generateToken(userId);
+    authCookie = `token=${token}`;
+
     User.findById.mockResolvedValue({
       _id: userId,
       name: 'Test User',
