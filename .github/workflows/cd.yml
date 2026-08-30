@@ -26,14 +26,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Lowercase Repository Owner
+        id: repo-owner
+        run: |
+          echo "owner=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
       - name: Build and Push Backend Image
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/taskflow-backend:latest
-            ghcr.io/${{ github.repository_owner }}/taskflow-backend:${{ github.sha }}
+            ghcr.io/${{ steps.repo-owner.outputs.owner }}/taskflow-backend:latest
+            ghcr.io/${{ steps.repo-owner.outputs.owner }}/taskflow-backend:${{ github.sha }}
 
       - name: Build and Push Frontend Image
         uses: docker/build-push-action@v5
@@ -43,8 +48,8 @@ jobs:
             VITE_API_BASE_URL=/api
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/taskflow-frontend:latest
-            ghcr.io/${{ github.repository_owner }}/taskflow-frontend:${{ github.sha }}
+            ghcr.io/${{ steps.repo-owner.outputs.owner }}/taskflow-frontend:latest
+            ghcr.io/${{ steps.repo-owner.outputs.owner }}/taskflow-frontend:${{ github.sha }}
 
   deploy:
     name: Deploy to Cloud VM (GCP / AWS)
