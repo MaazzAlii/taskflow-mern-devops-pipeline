@@ -1,27 +1,112 @@
-# TaskFlow — MERN + Docker + CI/CD + AWS EC2
+# 🚀 TaskFlow — Containerized MERN Task Management Platform & DevOps Pipeline
 
-> A full-stack MERN (MongoDB, Express, React, Node.js) task and board management application, containerized with Docker, featuring an automated GitHub Actions CI/CD pipeline deployed to AWS EC2 with Nginx reverse proxying and SSL security.
+[![CI Pipeline](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/MaazzAlii/taskflow-mern-devops-pipeline/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-v20.x-green.svg)](https://nodejs.org)
+[![Docker](https://img.shields.io/badge/Docker-Multi--Stage-blue.svg)](https://www.docker.com/)
 
----
-
-## 📌 Project Overview
-**TaskFlow** is designed to satisfy the core DevOps Essentials workflow:
-- 🐳 **Dockerization:** Multi-stage Docker builds for backend and frontend React apps.
-- ⚙️ **CI/CD Pipeline:** Automated GitHub Actions workflows for linting, testing, image building, and automated deployment via GHCR to AWS EC2.
-- 🔒 **Security & Production Hardening:** httpOnly JWT auth, Nginx reverse proxying, CORS policy, non-root Docker execution.
+> **TaskFlow** is a modern, enterprise-ready full-stack MERN (MongoDB, Express, React, Node.js) board and task management application backed by a complete production DevOps pipeline including multi-stage Dockerization, GitHub Actions CI/CD, GHCR container registry publishing, host security hardening, and AWS EC2 deployment.
 
 ---
 
-## 🛠️ Architecture & Tech Stack
-- **Frontend:** React + Vite, TailwindCSS / Custom Glassmorphism CSS, Nginx (production)
-- **Backend:** Node.js + Express + Mongoose
-- **Database:** MongoDB (Atlas production / containerized local)
-- **Authentication:** JWT, httpOnly cookies
-- **Container Registry:** GitHub Container Registry (GHCR)
-- **CI/CD:** GitHub Actions
-- **Cloud Infrastructure:** AWS EC2 (Ubuntu 22.04 LTS)
+## 🌟 Key Application Features
+
+- 🔐 **Secure JWT Authentication:** Cookie-based session handling with `httpOnly`, `sameSite`, and password hashing via bcryptjs.
+- 📋 **Workspace Board Management:** Create, view, and delete project workspaces with cascaded task cleanup.
+- ⚡ **Interactive Task Tracker:** Dynamic task creation, real-time status transitions (`To Do` → `In Progress` → `Done`), inline editing, and status filtering.
+- 🎨 **Glassmorphism UI:** Premium dark-mode user interface built with modern CSS tokens, responsive layout scale, and micro-animations.
+- 🛡️ **Centralized Resilience:** Zod schema validation, global error handling middleware, AppError handling, and input sanitization.
 
 ---
 
-## 🚀 Getting Started
-*Detailed setup instructions, environment variables, local Docker Compose setup, and deployment guides will be documented as each milestone completes.*
+## 🛠️ Technology Stack & Architecture
+
+```text
+  +-----------------------+        +-----------------------+        +-----------------------+
+  |    React 18 + Vite    | -----> | Express + Node.js API | -----> |   MongoDB Atlas / DB  |
+  | (Nginx Container SPA) |        | (Non-Root Node Image) |        |  (User/Board/Task)    |
+  +-----------------------+        +-----------------------+        +-----------------------+
+```
+
+- **Frontend:** React 18, Vite, React Router v6, Axios, Vanilla CSS Glassmorphism
+- **Backend:** Node.js v20, Express.js, Mongoose, JWT, bcryptjs, Helmet, Cors, Zod, Rate-Limit
+- **DevOps & Infrastructure:** Docker (Multi-stage), Docker Compose, Nginx, GitHub Actions (CI/CD), GHCR, AWS EC2, UFW Firewall
+
+---
+
+## 🚀 Local Development Quickstart
+
+### Prerequisites
+- [Node.js v20+](https://nodejs.org/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+### 1. Clone & Configure Environment
+```bash
+git clone https://github.com/MaazzAlii/taskflow-mern-devops-pipeline.git
+cd taskflow-mern-devops-pipeline
+
+# Copy example environment files
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
+```
+
+### 2. Run via Docker Compose (Recommended)
+```bash
+docker compose up --build -d
+```
+- **Frontend App:** `http://localhost:8080`
+- **Backend API:** `http://localhost:5000`
+- **API Healthcheck:** `http://localhost:8080/api/health`
+
+---
+
+## 🧪 Testing Suite Execution
+
+### Backend Tests (Jest + In-Memory MongoDB)
+```bash
+cd backend
+npm test
+```
+*Executes 35 integration & unit tests across schemas, auth, controllers, and error handling.*
+
+### Frontend Tests (Vitest + React Testing Library)
+```bash
+cd frontend
+npm test
+```
+*Executes component tests covering auth screens, form validation, and board management.*
+
+---
+
+## 🚢 CI/CD & Deployment Pipeline Architecture
+
+```text
+ +---------------------+         +---------------------+         +---------------------+
+ |   git push main     | ------> |  GitHub Actions CI  | ------> |   Publish to GHCR   |
+ | (Feature Commit)    |         | (Lint, Test, Build) |         | (Backend & Frontend)|
+ +---------------------+         +---------------------+         +---------------------+
+                                                                            |
+                                                                            v
+ +---------------------+         +---------------------+         +---------------------+
+ | AWS EC2 Production  | <------ | Docker Compose Pull | <------ | SSH Deploy Trigger  |
+ |  Live Application   |         | & Container Restart |         |   (appleboy/ssh)    |
+ +---------------------+         +---------------------+         +---------------------+
+```
+
+---
+
+## 📚 Technical Documentation Index
+
+- 📄 [`docs/architecture.md`](file:///docs/architecture.md) — System request flow & container orchestration diagram
+- 🔒 [`docs/environment-variables.md`](file:///docs/environment-variables.md) — Environment variable reference matrix
+- 🐳 [`docs/local-docker-verification.md`](file:///docs/local-docker-verification.md) — Local multi-container verification report
+- 🖥️ [`docs/ec2-provisioning-guide.md`](file:///docs/ec2-provisioning-guide.md) — AWS EC2 launch & security group specs
+- 🛡️ [`docs/ec2-hardening-guide.md`](file:///docs/ec2-hardening-guide.md) — Server hardening & UFW firewall setup script
+- 🚀 [`docs/deployment.md`](file:///docs/deployment.md) — GHCR container registry & CD deployment guide
+- 🔐 [`docs/security-checklist.md`](file:///docs/security-checklist.md) — Production security audit checklist
+- 🌐 [`docs/ssl-domain-guide.md`](file:///docs/ssl-domain-guide.md) — Custom domain & Let's Encrypt SSL guide
+
+---
+
+## 📄 License
+Distributed under the MIT License. See `LICENSE` for details.
