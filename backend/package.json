@@ -12,7 +12,7 @@
     "start": "node src/server.js",
     "lint": "eslint . --allow-empty-input",
     "format": "prettier --write .",
-    "test": "jest --passWithNoTests --detectOpenHandles"
+    "test": "jest --passWithNoTests --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "",
