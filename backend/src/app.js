@@ -27,6 +27,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+const connectDB = require('./config/db');
+
+// DB connection guard middleware for serverless invocations
+app.use(async (req, res, next) => {
+  if (process.env.NODE_ENV !== 'test' && process.env.MONGO_URI) {
+    try {
+      await connectDB();
+    } catch (err) {
+      return next(err);
+    }
+  }
+  next();
+});
+
 // Request logger middleware
 app.use((req, res, next) => {
   if (process.env.NODE_ENV !== 'test') {

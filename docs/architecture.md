@@ -68,3 +68,26 @@
 3. **Database (`MongoDB Atlas`):** Fully managed cloud database housing persistent user profiles, workspace boards, and task items.
 4. **CI/CD Pipeline (`GitHub Actions`):** Automated validation (ESLint, Jest, Vitest) and image publishing to GitHub Container Registry (GHCR).
 5. **Cloud Hosting Host:** GCP Compute Engine `e2-micro` (Always Free) or AWS EC2 instance running Docker Engine.
+
+---
+
+## ⚡ Serverless Deployment Architecture (Vercel Option)
+
+```text
+ +---------------------+         +---------------------+         +---------------------+
+ |   Client Browser    | ------> | Vercel Edge Network | ------> | Static Frontend SPA |
+ +---------------------+         +---------------------+         | (React + Vite)      |
+                                            |                    +---------------------+
+                                            | /api/* rewrite
+                                            v
+                                 +---------------------+         +---------------------+
+                                 |  Vercel Serverless  | ------> |    MongoDB Atlas    |
+                                 | Function (index.js) |         | (Connection Cached) |
+                                 +---------------------+         +---------------------+
+```
+
+- **Zero-Cost Deployment:** Express app wrapped with `serverless-http` deployed as a serverless function at `/api/index.js`.
+- **Same-Origin API:** Frontend and API operate on the same domain, eliminating CORS overhead in production.
+- **Connection Caching:** MongoDB connection promise cached in `backend/src/config/db.js` across warm invocations.
+- **Local Dev Parity:** The exact same codebase runs locally via Docker Compose (`docker compose up --build`), preserving the Dockerized container deliverable.
+
