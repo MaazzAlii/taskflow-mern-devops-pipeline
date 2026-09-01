@@ -31,7 +31,7 @@ const connectDB = require('./config/db');
 
 // DB connection guard middleware for serverless invocations
 app.use(async (req, res, next) => {
-  if (process.env.NODE_ENV !== 'test' && process.env.MONGO_URI) {
+  if (process.env.NODE_ENV !== 'test') {
     try {
       await connectDB();
     } catch (err) {
