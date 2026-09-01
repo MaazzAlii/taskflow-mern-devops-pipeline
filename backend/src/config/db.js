@@ -10,11 +10,27 @@ const connectDB = async (uri) => {
   const mongoURI =
     uri ||
     process.env.MONGO_URI ||
-    process.env.MONGODB_URI ||
-    'mongodb://localhost:27017/taskflow';
+    process.env.MONGODB_URI;
+
+  if (!mongoURI) {
+    if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
+      throw new Error(
+        'MongoDB connection error: MONGO_URI or MONGODB_URI environment variable is not defined in Vercel Project Settings.'
+      );
+    }
+  }
+
+  const finalURI = mongoURI || 'mongodb://localhost:27017/taskflow';
 
   try {
-    cachedConnection = await mongoose.connect(mongoURI);
+    // Disable buffering in serverless so queries fail fast with clear errors if DB is unreachable
+    if (process.env.VERCEL) {
+      mongoose.set('bufferCommands', false);
+    }
+
+    cachedConnection = await mongoose.connect(finalURI, {
+      serverSelectionTimeoutMS: 5000,
+    });
     console.log(`MongoDB Connected: ${cachedConnection.connection.host}`);
     return cachedConnection;
   } catch (error) {
