@@ -58,12 +58,17 @@ const login = async (req, res, next) => {
       return res.status(400).json({ error: 'Please provide email and password' });
     }
 
-    const user = await User.findOne({ email: email.toLowerCase() }).select('+passwordHash');
+    const user = await User.findOne({ email: email.toLowerCase() }).select('+passwordHash +password');
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    const isMatch = await bcrypt.compare(password, user.passwordHash);
+    const hashToCompare = user.passwordHash || user.password;
+    if (!hashToCompare) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    const isMatch = await bcrypt.compare(password, hashToCompare);
     if (!isMatch) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }

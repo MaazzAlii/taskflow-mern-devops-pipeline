@@ -9,6 +9,8 @@ dist/
 build/
 out/
 .next/
+.vercel/
+.cache/
 *.tsbuildinfo
 
 # Environment & Secret Files
@@ -21,11 +23,18 @@ out/
 *.key
 *.cert
 
+# AI Agent & State Files
+.agent-state.md
+*.agent-state.md
+agent.md
+*.agent.md
+.agents/
+.gemini/
+
 # User-specified Files & Prompts
 00-START-HERE.md
 DevOps_Playlist_Master_Notes.md
 mern-devops-prompts-final/
-agent.md
 
 # Logs & Runtime Data
 logs

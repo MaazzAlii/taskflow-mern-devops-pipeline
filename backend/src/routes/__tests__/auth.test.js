@@ -47,6 +47,24 @@ describe('Auth Endpoints API', () => {
     });
   });
 
+  describe('POST /api/auth/login', () => {
+    it('should handle missing password hash gracefully without throwing bcrypt error', async () => {
+      const mockSelect = jest.fn().mockResolvedValue({
+        _id: '123',
+        email: 'test@example.com',
+        // passwordHash and password both undefined
+      });
+      User.findOne.mockReturnValue({ select: mockSelect });
+
+      const response = await request(app)
+        .post('/api/auth/login')
+        .send({ email: 'test@example.com', password: 'password123' });
+
+      expect(response.statusCode).toBe(401);
+      expect(response.body.error).toBe('Invalid email or password');
+    });
+  });
+
   describe('GET /api/auth/me', () => {
     it('should return 401 if no auth token cookie is provided', async () => {
       const response = await request(app).get('/api/auth/me');
